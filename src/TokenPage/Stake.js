@@ -94,7 +94,7 @@ export default function Stake() {
 
   const [tokenDetails, setTokenDetails] = React.useState({
     address: undefined,
-    symbol: "PANIC",
+    symbol: "AVLD",
     balance: undefined,
   });
 
@@ -174,7 +174,7 @@ export default function Stake() {
       const panicEarnedFinal = panicEarnedHalf[1];
       const panicLockedUnparsed = await stakingEps.lockedBalances(account);
       const panicLockedTotal = panicLockedUnparsed[0];
-      console.log("panic earned", panicEarnedFinal);
+      console.log("avld earned", panicEarnedFinal);
       setVestedBalance(ethers.utils.formatUnits(penaltyData[1])*2);
       setLockedBalance(ethers.utils.formatUnits(panicLockedTotal));
       setUnlockedBalance(ethers.utils.formatUnits(unlockedBal));
@@ -214,7 +214,7 @@ export default function Stake() {
         <Paper className={classes.paperContainer}>
 
         <Typography variant="h5" className={classes.title}>
-            Staked PANIC
+            Staked AVLD
           </Typography>
 
           <TableContainer>
@@ -232,7 +232,7 @@ export default function Stake() {
                   </TableCell>
                   <TableCell>
                     {Number(lockedBalance).toFixed(2)}
-                    <img src="assets/token/PANIC.svg" className={classes.smallTokenIcon}></img>
+                    <img src="assets/token/AVLD.svg" className={classes.smallTokenIcon}></img>
                   </TableCell>
                 </TableRow>
 
@@ -242,7 +242,7 @@ export default function Stake() {
                   </TableCell>
                   <TableCell>
                     {Number(vestedBalance).toFixed(2)}
-                    <img src="assets/token/PANIC.svg" className={classes.smallTokenIcon}></img>
+                    <img src="assets/token/AVLD.svg" className={classes.smallTokenIcon}></img>
                   </TableCell>
                 </TableRow>
 
@@ -252,7 +252,7 @@ export default function Stake() {
                   </TableCell>
                   <TableCell>
                     {Number(unlockedBalance).toFixed(2)}
-                    <img src="assets/token/PANIC.svg" className={classes.smallTokenIcon}></img>
+                    <img src="assets/token/AVLD.svg" className={classes.smallTokenIcon}></img>
                   </TableCell>
                 </TableRow>
 
@@ -263,11 +263,7 @@ export default function Stake() {
         {/* Stake w/o locking */}
         <Paper className={classes.paperContainer}>
           <Typography variant="h5" className={classes.title}>
-            Stake Panic
-          </Typography>
-
-          <Typography variant="subtitle1">
-              Stake PANIC and earn platform fees in yvWFTM without lock-up.
+            Stake AVLD
           </Typography>
 
           <Grid container direction="row" justifyContent="center">
@@ -301,16 +297,16 @@ export default function Stake() {
         {/* Stake & lock */}
         <Paper className={classes.paperContainer} >
           <Typography variant="h5" className={classes.title}>
-            Stake & Lock Panic
+            Stake & Lock AVLD
           </Typography>
 
           <Typography variant="subtitle1">
             <p>
-              Stake and lock PANIC, earn platform fees in yvWFTM + penalty fees in unlocked PANIC.
+              Stake and lock AVLD, earn penalty fees in unlocked AVLD.
             </p>
 
             <p>
-              PANIC deposited and locked is subject to a 2 year lock. You will continue to earn fees after the locks expire if you do not withdraw.
+              AVLD deposited and locked is subject to a 2 year lock. You will continue to earn fees after the locks expire if you do not withdraw.
             </p>
           </Typography>
 

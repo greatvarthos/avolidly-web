@@ -190,38 +190,12 @@ export default function Rewards() {
         <Paper className={classes.paperContainer}>
           <section>
             <Typography variant="h6" className={classes.title}>
-              Liquidity Providers
+              Staking
             </Typography>
-            <ul>
-              <li>
-                PANIC rewards are subject to a 2 year vesting period, but can also be claimed early at a 50% penalty.
-              </li>
-              <li>
-                Exiting before the end of the vesting period always incurs a 50% penalty no matter how early or late you choose to exit.
-              </li>
-              <li>
-                The 50% penalty is distributed continuously to PANIC lockers rewarding the long-term holders.
-              </li>
-            </ul>
+            <p>Avolidly at its core is a fork of the audited Solidly code-base from Andre Cronje. Our swap user interface, as a result, will be familiar to users throughout DeFi. This AMM supports not only both stable and non-stable pairs, but also multi-hop swaps (even those that include stable and non-stable pairs mixed routes) within a very intuitive contract interface. In addition we designed a farming incentives system which features very strong tokenomics.</p>
+            <p>Shout out to PanicSwap to paving much of the way for us. We'll be taking it from here however.</p>
           </section>
 
-
-          <section>
-            <Typography variant="h6" className={classes.title}>
-              For PANIC lockers:
-            </Typography>
-            <ul>
-              <li>
-                Lock dates are grouped by the week. Any lock between Monday to Sunday is grouped in the same week group, and will release at the same time 2 years later.
-              </li>
-              <li>
-                Locked PANIC is subject to a mandatory 2 years lock and cannot be unlocked early.
-              </li>
-              <li>
-                PANIC rewards from locking PANIC can be claimed anytime with no penalty.
-              </li>
-            </ul>
-          </section>
 
 
 
@@ -236,14 +210,14 @@ export default function Rewards() {
               </TableHead>
               <TableBody>
 
-                {/* Unlocked PANIC */}
+                {/* Unlocked AVLD */}
                 <TableRow>
                   <TableCell component="th" scope="row">
-                    Staked PANIC
+                    Staked AVLD
                   </TableCell>
                   <TableCell align="center">
                     {Number(unlockedBalance).toFixed(6)}                    
-                    <img src="assets/token/PANIC.svg" className={classes.smallTokenIcon}></img>
+                    <img src="assets/token/AVLD.svg" className={classes.smallTokenIcon}></img>
                   </TableCell>
                   <TableCell align="center">
                     <LoadingButton
@@ -259,19 +233,19 @@ export default function Rewards() {
                 </TableRow>
 
 
-                {/* PANIC Stake and Lock Rewards */}
+                {/* AVLD Stake and Lock Rewards */}
                 <TableRow>
                   <TableCell component="th" scope="row">
-                      PANIC Rewards
+                      AVLD Rewards
                   </TableCell>
                   <TableCell align="center">
                     {Number(panicRewards).toFixed(2) }
-                    <img src="assets/token/PANIC.svg" className={classes.smallTokenIcon}></img>
-                     PANIC
+                    <img src="assets/token/AVLD.svg" className={classes.smallTokenIcon}></img>
+                     AVLD
                     <hr/>
                     {Number(yvWFTMRewards).toFixed(2)}
-                    <img src="assets/token/yvWFTM.svg" className={classes.smallTokenIcon}></img>
-                     yvWFTM
+                    <img src="assets/token/WAVAX.svg" className={classes.smallTokenIcon}></img>
+                     WAVAX
                   </TableCell>
                   <TableCell align="center">
                     <LoadingButton
@@ -292,7 +266,7 @@ export default function Rewards() {
                   </TableCell>
                   <TableCell align="center">
                   {Number(vestedBalance/2).toFixed(6)}
-                  <img src="assets/token/PANIC.svg" className={classes.smallTokenIcon}></img>
+                  <img src="assets/token/AVLD.svg" className={classes.smallTokenIcon}></img>
                   </TableCell>
                   <TableCell align="center">
                     <LoadingButton

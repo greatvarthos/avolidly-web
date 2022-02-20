@@ -1,5 +1,5 @@
 
-# PanicSwap
+# Avolidly
 
 ## Available Scripts
 

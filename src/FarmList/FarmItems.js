@@ -1,9 +1,9 @@
 export const FarmItems = [
   {
-    title: "PANIC-WFTM Spooky LP",
+    title: "AVLD-WFTM Spooky LP",
     url: "/farms/1",
     cName: "farm-links",
-    symbol1: "PANIC",
+    symbol1: "AVLD",
     symbol2: "yvWFTM",
     boost: "12",
   },

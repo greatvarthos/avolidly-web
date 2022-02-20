@@ -9,7 +9,7 @@ class Header extends Component {
     return (
       <header id="header">
         <h1>
-          <img src={logo} className="logo" alt="PanicSwap" />
+          <img src={logo} className="logo" alt="Avolidly" />
         </h1>
       </header>
     );

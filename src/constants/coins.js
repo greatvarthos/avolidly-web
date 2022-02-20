@@ -2,6 +2,45 @@ import * as chains from './chains';
 
 // If you add coins for a new network, make sure Weth address (for the router you are using) is the first entry
 
+
+const AVALANCHECoins = [
+  {
+    name: "Avalanche",
+    abbr: "AVAX",
+    address: "", // Weth address is fetched from the router
+  },
+  {
+    name: "USDC.e",
+    abbr: "USDC.e",
+    address: "", // Weth address is fetched from the router
+  },
+  {
+    name: "USDT.e",
+    abbr: "USDT.e",
+    address: "", // Weth address is fetched from the router
+  },
+  {
+    name: "WETH.e",
+    abbr: "WETH.e",
+    address: "", // Weth address is fetched from the router
+  },
+  {
+    name: "sAVAX",
+    abbr: "sAVAX",
+    address: "", // Weth address is fetched from the router
+  },
+  {
+    name: "JOE",
+    abbr: "JOE",
+    address: "", // Weth address is fetched from the router
+  },
+  {
+    name: "WBTC.e",
+    abbr: "WBTC.e",
+    address: "", // Weth address is fetched from the router
+  },
+]
+
 const FANTOMCoins = [
   {
     name: "Fantom",
@@ -223,6 +262,7 @@ const GÖRLICoins = [
 const COINS = new Map();
 COINS.set(chains.ChainId.MAINNET, MAINNETCoins);
 COINS.set(chains.ChainId.FANTOM, FANTOMCoins);
+COINS.set(chains.ChainId.AVALANCHE, AVALANCHECoins);
 COINS.set(chains.ChainId.ROPSTEN, ROPSTENCoins);
 COINS.set(chains.ChainId.RINKEBY, RINKEBYCoins);
 COINS.set(chains.ChainId.GÖRLI, GÖRLICoins);

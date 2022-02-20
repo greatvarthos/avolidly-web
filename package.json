@@ -1,5 +1,5 @@
 {
-  "name": "react-panicswap", 
+  "name": "avolidly-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,7 +26,7 @@
     "prop-types": "^15.7.2",
     "notistack": "^1.0.10"
   },
-  "homepage": "https://panicswap.com/",
+  "homepage": "https://avolidly.com/",
   "scripts": {
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",

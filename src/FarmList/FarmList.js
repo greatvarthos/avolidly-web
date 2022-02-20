@@ -223,15 +223,15 @@ function FarmList(props) {
             Rewards
           </Typography>
           <Typography variant="h6" className={classes.description}>
-            Collect $PANIC rewards earned by farming
+            Collect AVLD rewards earned by farming
           </Typography>
           <Grid container direction="row" justifyContent="center" alignItems="center" xs={12}>
             <Grid container xs={12} justifyContent="center" alignItems="center" className={classes.farmCell}>
               <Grid item xs={6}>
                 <Typography variant="body1" justifyContent="center" className={classes.balance}>
                     {/* {formatBalance(coin1.balance, coin1.symbol)} */}
-                    <img src="assets/token/PANIC.svg" className={classes.tokenLogo}></img>
-                    {Number(pendingPanic).toFixed(2)} PANIC
+                    <img src="assets/token/AVLD.svg" className={classes.tokenLogo}></img>
+                    {Number(pendingPanic).toFixed(2)} AVLD
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -260,7 +260,7 @@ function FarmList(props) {
             Farms
           </Typography>
           <Typography variant="h6" className={classes.description}>
-            Stake your liquidity provider tokens (LPs) and earn $PANIC
+            Stake your liquidity provider tokens (LPs) and earn $AVLD
           </Typography>
 
           <div className="FarmItems">
