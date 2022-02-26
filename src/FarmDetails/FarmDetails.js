@@ -283,8 +283,6 @@ function FarmDetails(props) {
                 valid={hasBalance.deposit()}
                 success={false}
                 fail={false}
-                decimals={lpDetails.decimals}
-                maxWeiValue={balanceWeiStaked}
                 onClick={() => { deposit(field1Value) }}
               >
                 Deposit
@@ -302,6 +300,8 @@ function FarmDetails(props) {
                 symbol={lpDetails.symbol}
                 userCanChoose={false}
                 maxValue={balanceStaked}
+                decimals={lpDetails.decimals}
+                maxWeiValue={balanceWeiStaked}
               />
             </Grid>
             <Grid item xs={12} className={classes.buttonContainer}>
