@@ -84,11 +84,13 @@ function CoinSwapper(props) {
     address: undefined,
     symbol: undefined,
     balance: undefined,
+    decimals: undefined,
   });
   const [coin2, setCoin2] = React.useState({
     address: undefined,
     symbol: undefined,
     balance: undefined,
+    wei: undefined,
   });
 
   const [coins, setCoins] = React.useState([]);
@@ -165,6 +167,8 @@ function CoinSwapper(props) {
           address: address,
           symbol: data.symbol,
           balance: data.balance,
+          decimals: data.decimals,
+          wei: data.wei,
         });
       });
     }
@@ -187,6 +191,8 @@ function CoinSwapper(props) {
           address: address,
           symbol: data.symbol,
           balance: data.balance,
+          decimals: data.decimals,
+          wei: data.wei,
         });
       });
     }
@@ -284,6 +290,8 @@ function CoinSwapper(props) {
             setCoin1({
               ...coin1,
               balance: data.balance,
+              decimals: data.decimals,
+              wei: data.wei,
             });
           }
         );
@@ -294,6 +302,8 @@ function CoinSwapper(props) {
             setCoin2({
               ...coin2,
               balance: data.balance,
+              decimals: data.decimals,
+              wei: data.wei,
             });
           }
         );
@@ -391,6 +401,8 @@ function CoinSwapper(props) {
                 onClick={() => setDialog2Open(true)}
                 symbol={coin2.symbol !== undefined ? coin2.symbol : "Select"}
                 maxValue={coin2.balance}
+                decimals={coin1.decimals}
+                maxWeiValue={coin1.wei}
               />
             </Grid>
 

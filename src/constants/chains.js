@@ -6,7 +6,7 @@ export const ChainId = {
   FUJI: 43113,
 };
 
-export const networks = [ChainId.AVALANCHE, ChainId.FUJI]
+export const networks = [ChainId.AVALANCHE]
 
 
 export const routerAddress = new Map();
@@ -27,4 +27,4 @@ lpStakingAddress.set(ChainId.AVALANCHE, '0x9D74800c49FF65f40A21b9358bFaEbf41F9ab
 
 export const aprFeed = new Map();
 aprFeed.set(ChainId.FUJI, '0x887baa2685AFCe5D8e2Aae9B6c5965Fe590CaCd7');
-aprFeed.set(ChainId.AVALANCHE, '0x80EF02556d9569273dFA0a895289B9056CB63766');
+aprFeed.set(ChainId.AVALANCHE, '0x0a206ECaabD112DF6eE46277b41378C268e79833');

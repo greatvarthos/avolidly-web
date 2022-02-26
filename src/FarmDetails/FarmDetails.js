@@ -101,6 +101,7 @@ function FarmDetails(props) {
     address: undefined,
     symbol: undefined,
     balance: undefined,
+    decimals: 18,
   });
 
   const [coins, setCoins] = React.useState([]);
@@ -113,7 +114,9 @@ function FarmDetails(props) {
   const [loading, setLoading] = React.useState(false);
 
   const [balanceWallet, setBalanceWallet] = React.useState(0);
+  const [balanceWeiWallet, setBalanceWeiWallet] = React.useState(0);
   const [balanceStaked, setBalanceStaked] = React.useState(0);
+  const [balanceWeiStaked, setBalanceWeiStaked] = React.useState(0);
 
 
 
@@ -183,6 +186,7 @@ function FarmDetails(props) {
     if(chef){
       console.log(farmId);
       const uInfo = await chef.userInfo(farmId,account);
+      setBalanceWeiStaked(uInfo["amount"]);
       setBalanceStaked(ethers.utils.formatUnits(uInfo["amount"]));
       const pInfo = await chef.poolInfo(farmId);
       const lpt = pInfo["lpToken"];
@@ -191,6 +195,7 @@ function FarmDetails(props) {
       const lptC = getWeth(lpt, signer);
       const balWal = await lptC.balanceOf(account);
       //const balWal = await getLPBalance(lpt, signer, account);
+      setBalanceWeiWallet(balWal);
       setBalanceWallet(ethers.utils.formatUnits(balWal));
     }
   }, [chef]);
@@ -268,6 +273,8 @@ function FarmDetails(props) {
                 symbol={lpDetails.symbol}
                 userCanChoose={false}
                 maxValue={balanceWallet}
+                decimals={lpDetails.decimals}
+                maxWeiValue={balanceWeiWallet}
               />
             </Grid>
             <Grid item xs={12} className={classes.buttonContainer}>
@@ -276,6 +283,8 @@ function FarmDetails(props) {
                 valid={hasBalance.deposit()}
                 success={false}
                 fail={false}
+                decimals={lpDetails.decimals}
+                maxWeiValue={balanceWeiStaked}
                 onClick={() => { deposit(field1Value) }}
               >
                 Deposit

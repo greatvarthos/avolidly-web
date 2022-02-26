@@ -99,6 +99,7 @@ export default function Stake() {
   });
 
   const [panicBalance, setPanicBalance] = React.useState("0");
+  const [panicWeiBalance, setPanicWeiBalance] = React.useState("0");
 
   const [coins, setCoins] = React.useState([]);
 
@@ -183,6 +184,7 @@ export default function Stake() {
     if(panic){
       const bal = await panic.balanceOf(account);
       setPanicBalance(ethers.utils.formatUnits(bal));
+      setPanicWeiBalance(bal);
     }
   }, [panic]);
 
@@ -276,6 +278,8 @@ export default function Stake() {
                 symbol={tokenDetails.symbol}
                 userCanChoose={false}
                 maxValue={panicBalance}
+                decimals={tokenDetails.decimals}
+                maxWeiValue={panicWeiBalance}
               />
             </Grid>
 
@@ -320,6 +324,8 @@ export default function Stake() {
                 symbol={tokenDetails.symbol}
                 userCanChoose={false}
                 maxValue={panicBalance}
+                decimals={tokenDetails.decimals}
+                maxWeiValue={panicWeiBalance}
               />
             </Grid>
             <Grid item xs={12} className={classes.buttonContainer}>
