@@ -35,6 +35,7 @@ export default function Footer() {
                     Avolidly
                 </Typography>
 
+                <a href="https://docs.avolidly.com/">Docs</a> |&nbsp;
                 <a href="https://discord.gg/u6hfFmmKQc">Discord</a> |&nbsp;
                 <a href="https://twitter.com/avaxsolidly">Twitter</a>
             </p>

@@ -253,6 +253,7 @@ function LiquidityRemover(props) {
         coin1.address,
         coin2.address,
         field1Value,
+        router,
         factory,
         signer
       ).then((data) => {
@@ -325,11 +326,11 @@ function LiquidityRemover(props) {
         const router = await getRouter (chains.routerAddress.get(chainId), signer)
         setRouter(router);
         // Get Weth address from router
-        await router.weth().then((wethAddress) => {
+        await router.wftm().then((wethAddress) => {
           setWeth(getWeth (wethAddress, signer));
           // Set the value of the weth address in the default coins array
           const coins = COINS.get(chainId);
-          coins[0].address = wethAddress;
+          //coins[0].address = wethAddress;
           setCoins(coins);
         });
         // Get the factory address from the router
@@ -447,7 +448,7 @@ function LiquidityRemover(props) {
           <Grid container direction="row" justifyContent="center">
             <Grid item xs={6}>
               <Typography variant="body1" className={classes.balance}>
-                {formatReserve(liquidityTokens, "UNI-V2")}
+                {formatReserve(liquidityTokens, "LP")}
               </Typography>
             </Grid>
           </Grid>

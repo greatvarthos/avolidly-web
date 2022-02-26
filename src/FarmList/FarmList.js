@@ -151,18 +151,18 @@ function FarmList(props) {
         console.log('chainID: ', chainId);
         // Get the router using the chainID
         const router = await getRouter(chains.routerAddress.get(chainId), signer);
-        const chef = await getChef("0xC02563f20Ba3e91E459299C3AC1f70724272D618", signer);
-        const aprFeed = await getAprFeed("0xdD8C47d35248188eEA2d23037f3C80529Cf7b3ED", signer);
+        const chef = await getChef(chains.lpStakingAddress.get(chainId), signer);
+        const aprFeed = await getAprFeed(chains.aprFeed.get(chainId), signer);
         setAprFeed(aprFeed);
         setRouter(router);
         setChef(chef);
         // Get Weth address from router
-        await router.weth().then((wethAddress) => {
+        await router.wftm().then((wethAddress) => {
           console.log('Weth: ', wethAddress);
           setWeth(getWeth(wethAddress, signer));
           // Set the value of the weth address in the default coins array
           const coins = COINS.get(chainId);
-          coins[0].address = wethAddress;
+          //coins[0].address = wethAddress;
           setCoins(coins);
         });
         // Get the factory address from the router
@@ -298,7 +298,7 @@ function FarmList(props) {
                           <b>Farm APR</b>
                           </Typography>
                           <Typography>
-                            {aprMap[index+1]/100+"%"}
+                            {aprMap[index]/100+"%"}
                           </Typography>
                         </Grid>
                         <Grid item xs={4}>
@@ -306,7 +306,7 @@ function FarmList(props) {
                           <b>Total Value Staked</b>
                           </Typography>
                           <Typography>
-                            {commafy(Number(tvlMap[index+1]/1e18).toFixed(0)) + "$"}
+                            {commafy(Number(tvlMap[index]/1e18).toFixed(0)) + "$"}
                           </Typography>
                         </Grid>
                         <Grid item xs={4}>

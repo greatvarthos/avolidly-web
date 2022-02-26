@@ -26,7 +26,7 @@ import {
   swapTokens,
   getReserves,
   getPoolInfo,
-  getUserInfo,
+  getUserInfo, getLPBalance,
 } from "../ethereumFunctions";
 import LoadingButton from "../Components/LoadingButton";
 import WrongNetwork from "../Components/wrongNetwork";
@@ -150,17 +150,17 @@ function FarmDetails(props) {
         console.log('chainID: ', chainId);
         // Get the router using the chainID
         const router = await getRouter(chains.routerAddress.get(chainId), signer);
-        const chef = await getChef("0xC02563f20Ba3e91E459299C3AC1f70724272D618", signer);
+        const chef = await getChef(chains.lpStakingAddress.get(chainId), signer);
         setRouter(router);
         setChef(chef);
         //getUserInfo(farmId,chef,signer);
         // Get Weth address from router
-        await router.weth().then((wethAddress) => {
+        await router.wftm().then((wethAddress) => {
           console.log('Weth: ', wethAddress);
           setWeth(getWeth(wethAddress, signer));
           // Set the value of the weth address in the default coins array
           const coins = COINS.get(chainId);
-          coins[0].address = wethAddress;
+          //coins[0].address = wethAddress;
           setCoins(coins);
         });
         
@@ -181,13 +181,16 @@ function FarmDetails(props) {
 
   useEffect( async() => {
     if(chef){
+      console.log(farmId);
       const uInfo = await chef.userInfo(farmId,account);
       setBalanceStaked(ethers.utils.formatUnits(uInfo["amount"]));
       const pInfo = await chef.poolInfo(farmId);
       const lpt = pInfo["lpToken"];
       console.log(lpt);
+
       const lptC = getWeth(lpt, signer);
       const balWal = await lptC.balanceOf(account);
+      //const balWal = await getLPBalance(lpt, signer, account);
       setBalanceWallet(ethers.utils.formatUnits(balWal));
     }
   }, [chef]);
@@ -197,18 +200,19 @@ function FarmDetails(props) {
   
     const amountIn = ethers.utils.parseUnits(Number(amount).toFixed(18), 18);
 
+    console.log(farmId);
     const pInfo = await chef.poolInfo(farmId);
     const lpt = pInfo["lpToken"];
     console.log(lpt);
     const lptC = getWeth(lpt, signer);
     console.log("approving", amountIn);
 
-    const allowance = await lptC.allowance(account, "0xC02563f20Ba3e91E459299C3AC1f70724272D618");
+    const allowance = await lptC.allowance(account, chains.lpStakingAddress.get(chainId));
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
     console.log("allowance",allowance);
     if(allowance < amountIn){
-        await lptC.approve("0xC02563f20Ba3e91E459299C3AC1f70724272D618", "99999999999999999999999999999");
+        await lptC.approve(chains.lpStakingAddress.get(chainId), "99999999999999999999999999999");
         await delay(5000);
     }
     await chef.deposit(farmId, amountIn);
@@ -248,9 +252,9 @@ function FarmDetails(props) {
       <Container maxWidth="md">
         <Paper className={classes.paperContainer}>
           <Typography variant="h5" className={classes.title}>
-            <img src={'/assets/token/'+ FarmItems[farmId-1].symbol1 + ".svg"} class={classes.tokenLogo}></img>
-            <img src={'/assets/token/'+ FarmItems[farmId-1].symbol2 + ".svg"} class={classes.tokenLogo}></img>
-            {FarmItems[farmId-1].title}
+            <img src={'/assets/token/'+ FarmItems[farmId].symbol1 + ".svg"} class={classes.tokenLogo}></img>
+            <img src={'/assets/token/'+ FarmItems[farmId].symbol2 + ".svg"} class={classes.tokenLogo}></img>
+            {FarmItems[farmId].title}
           </Typography>
 
           {/* Deposit */}

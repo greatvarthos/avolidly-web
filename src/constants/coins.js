@@ -5,6 +5,49 @@ import * as chains from './chains';
 
 const AVALANCHECoins = [
   {
+    name: "Wrapped Avalanche",
+    abbr: "WAVAX",
+    address: "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7", // Weth address is fetched from the router
+  },
+  {
+    name: "USDC.e",
+    abbr: "USDC.e",
+    address: "0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664", // Weth address is fetched from the router
+  },
+  {
+    name: "USDC",
+    abbr: "USDC",
+    address: "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e", // Weth address is fetched from the router
+  },
+  {
+    name: "USDT.e",
+    abbr: "USDT.e",
+    address: "0xc7198437980c041c805a1edcba50c1ce5db95118", // Weth address is fetched from the router
+  },
+  {
+    name: "WETH.e",
+    abbr: "WETH.e",
+    address: "0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab", // Weth address is fetched from the router
+  },
+  {
+    name: "sAVAX",
+    abbr: "sAVAX",
+    address: "0x2b2c81e08f1af8835a78bb2a90ae924ace0ea4be", // Weth address is fetched from the router
+  },
+  {
+    name: "JOE",
+    abbr: "JOE",
+    address: "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd", // Weth address is fetched from the router
+  },
+  {
+    name: "WBTC.e",
+    abbr: "WBTC.e",
+    address: "0x50b7545627a5162f82a992c33b87adc75187b218", // Weth address is fetched from the router
+  },
+]
+
+const FUJICoins = [
+  {
     name: "Avalanche",
     abbr: "AVAX",
     address: "", // Weth address is fetched from the router
@@ -12,32 +55,37 @@ const AVALANCHECoins = [
   {
     name: "USDC.e",
     abbr: "USDC.e",
-    address: "", // Weth address is fetched from the router
+    address: "0xb3fe1f99c5930770b7761233689d976975d6a0a1", // Weth address is fetched from the router
+  },
+  {
+    name: "USDC",
+    abbr: "USDC",
+    address: "0x95532330e48084f4a272b472d4ebd7677775e035", // Weth address is fetched from the router
   },
   {
     name: "USDT.e",
     abbr: "USDT.e",
-    address: "", // Weth address is fetched from the router
+    address: "0x1d977311d0785bd01d8b43cf10df26d83c823736", // Weth address is fetched from the router
   },
   {
     name: "WETH.e",
     abbr: "WETH.e",
-    address: "", // Weth address is fetched from the router
+    address: "0x2e3d1304a6d1b0f216b0bc3195ec303b92e22f16", // Weth address is fetched from the router
   },
   {
     name: "sAVAX",
     abbr: "sAVAX",
-    address: "", // Weth address is fetched from the router
+    address: "0x78cfd55aad10daf37e00d2879900099f7e0bc321", // Weth address is fetched from the router
   },
   {
     name: "JOE",
     abbr: "JOE",
-    address: "", // Weth address is fetched from the router
+    address: "0x35412896953013685fac43d6cbaab68669938304", // Weth address is fetched from the router
   },
   {
     name: "WBTC.e",
     abbr: "WBTC.e",
-    address: "", // Weth address is fetched from the router
+    address: "0xd6b5b6acd7f5cbd57530e23df233adec2251ac22", // Weth address is fetched from the router
   },
 ]
 
@@ -263,6 +311,7 @@ const COINS = new Map();
 COINS.set(chains.ChainId.MAINNET, MAINNETCoins);
 COINS.set(chains.ChainId.FANTOM, FANTOMCoins);
 COINS.set(chains.ChainId.AVALANCHE, AVALANCHECoins);
+COINS.set(chains.ChainId.FUJI, FUJICoins);
 COINS.set(chains.ChainId.ROPSTEN, ROPSTENCoins);
 COINS.set(chains.ChainId.RINKEBY, RINKEBYCoins);
 COINS.set(chains.ChainId.GÖRLI, GÖRLICoins);
@@ -270,4 +319,6 @@ COINS.set(chains.ChainId.KOVAN, KOVANCoins);
 COINS.set(chains.ChainId.AUTONITY, AUTONITYCoins);
 COINS.set(chains.ChainId.DEVNET, DEVNETCoins);
 COINS.set(chains.ChainId.PARASTATE, PARASTATECoins);
-export default COINS
+export default COINS;
+
+// don't forget to add stablecoins to stablecoins.js

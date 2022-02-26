@@ -322,16 +322,18 @@ function CoinSwapper(props) {
         const router = await getRouter (chains.routerAddress.get(chainId), signer)
         setRouter(router);
         // Get Weth address from router
-        await router.weth().then((wethAddress) => {
+        await router.wftm().then((wethAddress) => {
           console.log('Weth: ', wethAddress);
           setWeth(getWeth (wethAddress, signer));
           // Set the value of the weth address in the default coins array
           const coins = COINS.get(chainId);
-          coins[0].address = wethAddress;
+          //coins[0].address = wethAddress;
           setCoins(coins);
+
         });
         // Get the factory address from the router
         await router.factory().then((factory_address) => {
+          console.log('Factory address: ', factory_address);
           setFactory(getFactory (factory_address, signer));
         })
       } else {

@@ -272,6 +272,7 @@ function LiquidityDeployer(props) {
         coin2.address,
         field1Value,
         field2Value,
+        router,
         factory,
         signer
       ).then((data) => {
@@ -348,11 +349,11 @@ function LiquidityDeployer(props) {
         const router = await getRouter (chains.routerAddress.get(chainId), signer)
         setRouter(router);
         // Get Weth address from router
-        await router.weth().then((wethAddress) => {
+        await router.wftm().then((wethAddress) => {
           setWeth(getWeth (wethAddress, signer));
           // Set the value of the weth address in the default coins array
           const coins = COINS.get(chainId);
-          coins[0].address = wethAddress;
+          //coins[0].address = wethAddress;
           setCoins(coins);
         });
         // Get the factory address from the router

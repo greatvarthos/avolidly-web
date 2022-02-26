@@ -101,23 +101,16 @@ export async function getBalanceAndSymbol(
   coins
 ) {
   try {
-    if (address === weth_address) {
-      const balanceRaw = await provider.getBalance(accountAddress);
+    const token = new Contract(address, ERC20.abi, signer);
+    const tokenDecimals = await getDecimals(token);
+    const balanceRaw = await token.balanceOf(accountAddress);
+    const symbol = await token.symbol();
 
-      return {
-        balance: ethers.utils.formatEther(balanceRaw),
-        symbol: coins[0].abbr,
-      };
-    } else {
-      const token = new Contract(address, ERC20.abi, signer);
-      const tokenDecimals = await getDecimals(token);
-      const balanceRaw = await token.balanceOf(accountAddress);
-      const symbol = await token.symbol();
-
-      return {
-        balance: ethers.BigNumber.from(balanceRaw)/10**(tokenDecimals),
-        symbol: symbol,
-      };
+    return {
+      balance: ethers.BigNumber.from(balanceRaw) / 10 ** (tokenDecimals),
+      symbol: symbol,
+      wei: balanceRaw,
+      decimals: tokenDecimals,
     }
   } catch (error) {
     console.log ('The getBalanceAndSymbol function had an error!');
@@ -179,6 +172,14 @@ export async function swapTokens( // todo removed bool from interface
   const allowance = await token1.allowance(accountAddress, routerContract.address);
   if(Number(allowance)<amountIn)
     await token1.approve(routerContract.address, amountIn);
+  await routerContract.swapExactTokensForTokens(
+      amountIn,
+      actualAmountOut[1],
+      actualTokens,
+      accountAddress,
+      deadline
+  );
+  /*
   const wethAddress = await routerContract.weth();
 
   if (address1 === wethAddress) {
@@ -208,6 +209,8 @@ export async function swapTokens( // todo removed bool from interface
       deadline
     );
   }
+
+   */
 }
 
 //This function returns the conversion rate between two token addresses
@@ -288,6 +291,15 @@ export async function fetchReserves(address1, address2, pair, signer) {
   }
 }
 
+export async function getLPBalance(pairAddress, signer, accountAddress) {
+  const pair = new Contract(pairAddress, PAIR.abi, signer);
+  const liquidityTokens_BN = await pair.balanceOf(accountAddress);
+  const liquidityTokens = Number(
+      ethers.utils.formatEther(liquidityTokens_BN)
+  );
+  return liquidityTokens;
+}
+
 // This function returns the reserves stored in a the liquidity pool between the token of address1 and the token
 // of address2, as well as the liquidity tokens owned by accountAddress for that pair.
 //    `address1` - An Ethereum address of the token to trade from (either a token or AUT)
@@ -303,7 +315,11 @@ export async function getReserves(
 ) {
   try {
     const stable = checkStable(address1, address2);
+    console.log('stable:', stable);
+    console.log(address1);
+    console.log(address2);
     const pairAddress = await factory.getPair(address1, address2, stable);
+    console.log('pair', pairAddress);
     const pair = new Contract(pairAddress, PAIR.abi, signer);
     if (pairAddress !== '0x0000000000000000000000000000000000000000'){
   

@@ -1,6 +1,10 @@
+import STABLECOINS from './constants/stablecoins';
+
 export function checkStable(address1, address2){
+    /*
     let isBtc = {};
     let isUsd = {};
+
     const renbtc = "0xDBf31dF14B66535aF65AaC99C32e9eA844e14501";
     const yvwbtc = "0xd817A100AB8A29fE3DBd925c2EB489D67F758DA9";
     const yvdai = "0x637eC617c86D24E421328e6CAEa1d92114892439";
@@ -20,6 +24,19 @@ export function checkStable(address1, address2){
       if(isUsd[address1.toLowerCase()] && isUsd[address2.toLowerCase()]) result = true
     }catch{
       
+    }
+
+     */
+    let isStable = {};
+    STABLECOINS.forEach((item, index) => {
+        isStable[item.toLowerCase()] = true;
+    });
+    //console.log(STABLECOINS);
+    let result = false;
+    try {
+        if (isStable[address1.toLowerCase()] && isStable[address2.toLowerCase()]) result = true;
+    } catch {
+
     }
     return result;
   }

@@ -138,17 +138,17 @@ export default function Stake() {
         console.log('chainID: ', chainId);
         // Get the router using the chainID
         const router = await getRouter(chains.routerAddress.get(chainId), signer);
-        const stakingEps = await getEpsStaking("0x536b88CC4Aa42450aaB021738bf22D63DDC7303e",signer);
+        const stakingEps = await getEpsStaking(chains.epsStakingAddress.get(chainId), signer);
         setRouter(router);
         setStakingEps(stakingEps);
-        setPanic(getWeth("0xA882CeAC81B22FC2bEF8E1A82e823e3E9603310B",signer));
+        setPanic(getWeth(chains.tokenAddress.get(chainId), signer));
         // Get Weth address from router
-        await router.weth().then((wethAddress) => {
+        await router.wftm().then((wethAddress) => {
           console.log('Weth: ', wethAddress);
           setWeth(getWeth(wethAddress, signer));
           // Set the value of the weth address in the default coins array
           const coins = COINS.get(chainId);
-          coins[0].address = wethAddress;
+          //coins[0].address = wethAddress;
           setCoins(coins);
         });
         // Get the factory address from the router
@@ -193,9 +193,9 @@ export default function Stake() {
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
     const amountIn = ethers.utils.parseUnits(bal, 18);
-    const allo = await panic.allowance(account,"0x536b88CC4Aa42450aaB021738bf22D63DDC7303e");
+    const allo = await panic.allowance(account, chains.epsStakingAddress.get(chainId));
     if(Number(allo) < Number(amountIn)){
-      await panic.approve("0x536b88CC4Aa42450aaB021738bf22D63DDC7303e","99999999999999999999999999");
+      await panic.approve(chains.epsStakingAddress.get(chainId),"99999999999999999999999999");
       await delay(5000);
     }
     await stakingEps.stake(amountIn, lockrnt);

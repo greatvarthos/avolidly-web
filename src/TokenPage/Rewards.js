@@ -123,17 +123,17 @@ export default function Rewards() {
         console.log('chainID: ', chainId);
         // Get the router using the chainID
         const router = await getRouter(chains.routerAddress.get(chainId), signer);
-        const stakingEps = await getEpsStaking("0x536b88CC4Aa42450aaB021738bf22D63DDC7303e",signer);
+        const stakingEps = await getEpsStaking(chains.epsStakingAddress.get(chainId),signer);
         setRouter(router);
         setStakingEps(stakingEps);
-        setPanic(getWeth("0xA882CeAC81B22FC2bEF8E1A82e823e3E9603310B",signer));
+        setPanic(getWeth(chains.tokenAddress.get(chainId),signer));
         // Get Weth address from router
-        await router.weth().then((wethAddress) => {
+        await router.wftm().then((wethAddress) => {
           console.log('Weth: ', wethAddress);
           setWeth(getWeth(wethAddress, signer));
           // Set the value of the weth address in the default coins array
           const coins = COINS.get(chainId);
-          coins[0].address = wethAddress;
+          //coins[0].address = wethAddress;
           setCoins(coins);
         });
         // Get the factory address from the router
@@ -152,15 +152,30 @@ export default function Rewards() {
 
   useEffect( async() => {
     if(stakingEps){
+      await Promise.all([
+        stakingEps.unlockedBalance(account),
+        stakingEps.withdrawableBalance(account),
+        stakingEps.claimableRewards(account)
+      ]).then((values) => {
+        console.log(values);
+        setUnlockedBalance(ethers.utils.formatUnits(values[0]));
+        setVestedBalance(ethers.utils.formatUnits(values[1]['penaltyAmount']*2));
+
+        setPanicRewards(ethers.utils.formatUnits(values[2][0][1]));
+        setYvWFTMRewards(0);
+      });
+      /*
       const [ unlockedBal, { 1: penaltyData }, [{ 1: panicEarned}, { 1: yvWFTMEarned}]] = await Promise.all([
         stakingEps.unlockedBalance(account),
         stakingEps.withdrawableBalance(account),
         stakingEps.claimableRewards(account)
-      ])
+      ]);
       setVestedBalance(ethers.utils.formatUnits(penaltyData)*2);
       setUnlockedBalance(ethers.utils.formatUnits(unlockedBal));
       setPanicRewards(ethers.utils.formatUnits(panicEarned));
       setYvWFTMRewards(ethers.utils.formatUnits(yvWFTMEarned));
+
+       */
     }
   }, [panic]);
 
